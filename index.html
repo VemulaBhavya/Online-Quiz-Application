@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>QuizApp — Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <main class="centered-page">
+    <div class="card login-card">
+      <h1>Welcome to QuizApp</h1>
+      <p>Enter your details to start</p>
+
+      <form id="loginForm">
+        <label>Name
+          <input type="text" id="name" required placeholder="Your name" />
+        </label>
+
+        <label>Age
+          <input type="number" id="age" min="4" required placeholder="Your age" />
+        </label>
+
+        <label>Are you a student?
+          <select id="level" required>
+            <option value="school1">School student (above 1st standard)</option>
+            <option value="school5">School student (above 5th standard)</option>
+            <option value="college">College student</option>
+            <option value="other">Other</option>
+          </select>
+        </label>
+
+        <button class="btn" type="submit">Continue</button>
+      </form>
+
+      <p class="muted">Already want to browse? <a href="about.html">About</a> • <a href="about.html">Contact</a></p>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const age = document.getElementById('age').value.trim();
+      const level = document.getElementById('level').value;
+      if (!name || !age) return alert('Please enter name and age.');
+      // store user details
+      localStorage.setItem('quiz_user', JSON.stringify({ name, age, level }));
+      // go to categories
+      location.href = 'categories.html';
+    });
+  </script>
+</body>
+
+</html>

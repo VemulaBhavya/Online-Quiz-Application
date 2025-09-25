@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>QuizApp — Result</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="topbar">
+    <h2>QuizApp</h2>
+    <nav><a href="categories.html">Home</a> <a href="index.html">Logout</a></nav>
+  </header>
+
+  <main class="container">
+    <section class="card result-card">
+      <h1>Your Result</h1>
+      <p id="scoreText"></p>
+      <p id="performance"></p>
+
+      <div id="review"></div>
+
+      <div class="result-actions">
+        <button onclick="retry()" class="btn">Retry</button>
+        <button onclick="goHome()" class="btn alt">Home</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">© 2025 QuizApp</footer>
+
+  <script>
+    const final = JSON.parse(localStorage.getItem('quiz_final') || 'null');
+    if (!final) {
+      // if no result, go back
+      location.href = 'index.html';
+    } else {
+      document.getElementById('scoreText').innerText = `You scored ${final.score} / ${final.total}`;
+      let msg = 'Keep Practicing!';
+      if (final.score === final.total) msg = 'Excellent! 🌟';
+      else if (final.score >= Math.ceil(final.total * 0.6)) msg = 'Good Job! 👍';
+      document.getElementById('performance').innerText = msg;
+
+      // optionally show answers
+      const review = document.getElementById('review');
+      review.innerHTML = '<h3>Review</h3>';
+      final.answers.forEach((a, i) => {
+        const div = document.createElement('div');
+        div.className = 'review-item';
+        div.innerHTML = `<strong>Q${i + 1}:</strong> ${a.q}
+          <br><span class="${a.correct ? 'correct' : 'wrong'}">Your: ${a.y}</span>
+          <span class="muted"> • Correct: ${a.c}</span>`;
+        review.appendChild(div);
+      });
+    }
+
+    function retry() {
+      // go back to categories to reselect or restart same
+      location.href = 'categories.html';
+    }
+    function goHome() { location.href = 'index.html'; }
+  </script>
+</body>
+
+</html>

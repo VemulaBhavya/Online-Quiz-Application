@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>QuizApp — Categories</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="topbar">
+    <h2>QuizApp</h2>
+    <nav><a href="index.html">Logout</a> <a href="about.html">About</a></nav>
+  </header>
+
+  <main class="container">
+    <section class="intro-card">
+      <h1>Choose a Category</h1>
+      <p id="welcomeText"></p>
+    </section>
+
+    <section class="grid categories-grid">
+      <button class="card category-btn" data-cat="general">🎉 General Knowledge</button>
+      <button class="card category-btn" data-cat="science">🔬 Science</button>
+      <button class="card category-btn" data-cat="sports">⚽ Sports</button>
+      <button class="card category-btn" data-cat="history">🏛️ History</button>
+    </section>
+  </main>
+
+  <footer class="footer">© 2025 QuizApp | Made by Student</footer>
+
+  <script>
+    const user = JSON.parse(localStorage.getItem('quiz_user') || 'null');
+    if (!user) location.href = 'index.html';
+    document.getElementById('welcomeText').innerText = `Hello ${user.name} (Age: ${user.age}) — Level: ${user.level}`;
+
+    document.querySelectorAll('.category-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const cat = btn.dataset.cat;
+        localStorage.setItem('quiz_category', cat);
+        // store starting timestamp or anything else if needed
+        location.href = 'quiz.html';
+      });
+    });
+  </script>
+</body>
+
+</html>

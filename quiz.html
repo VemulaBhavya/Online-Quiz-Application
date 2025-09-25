@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>QuizApp — Quiz</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="topbar">
+    <h2>QuizApp</h2>
+    <nav><a href="categories.html">Back</a> <a href="index.html">Logout</a></nav>
+  </header>
+
+  <main class="container">
+    <section id="userInfo" class="mini-card"></section>
+
+    <section id="quizArea" class="card">
+      <div id="progress" class="progress">Question 1 of 10</div>
+      <h2 id="question">Loading …</h2>
+      <div id="options" class="options"></div>
+
+      <div class="controls">
+        <button id="prevBtn" class="btn alt">Previous</button>
+        <div class="timer" id="timer">⏰ 30s</div>
+        <button id="nextBtn" class="btn">Next</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">© 2025 QuizApp</footer>
+
+  <script src="script.js"></script>
+  <script>
+    // initialize quiz when page loaded
+    startQuizFromStorage(); // function defined in script.js
+  </script>
+</body>
+
+</html>
